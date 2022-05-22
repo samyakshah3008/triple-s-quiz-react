@@ -1,9 +1,33 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useQuiz } from "../../contexts/quizContext";
+import { getQuiz } from "../../services/dataService";
 import "./rulepage.css";
 
 export default function RulePage() {
   const params = useParams();
+
+  const { quizDispatch, quizState } = useQuiz();
+
+  const onStartClickHandler = async () => {
+    const response = await getQuiz(params.quizId || "");
+    quizDispatch({ type: "SET_CATEGORY", payload: params.quizId || "" });
+    quizDispatch({ type: "SET_ACTIVE_QUESTION", payload: 0 });
+    quizDispatch({
+      type: "SET_ACTIVE_QUIZ",
+      payload: response?.questions,
+    });
+    quizDispatch({
+      type: "SET_ACTIVE_QUIZ_ANSWERS",
+      payload: response?.answers,
+    });
+    quizDispatch({
+      type: "SET_CATEGORY_NAME",
+      payload: response?.categoryName,
+    });
+    console.log(response);
+  };
+
   // onstart function
   // active quiz object(store it in context)
   // active question 0
@@ -29,7 +53,12 @@ export default function RulePage() {
           <div className="rule">
             Score 70% or above to unlock the next level
           </div>
-          <button className="start-quiz-btn margin-top">Start Quiz</button>
+          <button
+            onClick={onStartClickHandler}
+            className="start-quiz-btn margin-top"
+          >
+            Start Quiz
+          </button>
         </div>
       </main>
     </div>
