@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuiz } from "../contexts/quizContext";
 import "../Pages/questionpage/questionpage.css";
 
@@ -7,8 +8,9 @@ export default function Questions() {
   const { activeQuestion, activeQuiz } = quizState;
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const optionsArray = activeQuiz[activeQuestion]?.options;
+  const navigate = useNavigate();
 
-  if (activeQuestion === 4) {
+  if (activeQuestion > 4) {
     navigate("/results");
   }
 
@@ -35,10 +37,7 @@ export default function Questions() {
       type: "RESET_ANSWERS",
     });
   };
-  //   console.log(activeQuestion);
-  console.log(quizState);
-  console.log(activeQuiz[activeQuestion]?.options);
-  console.log(selectedAnswer);
+
   return (
     <div>
       {activeQuestion <= 4 && (
@@ -61,29 +60,36 @@ export default function Questions() {
 
               <div className="question text-white  margin-top-xl">
                 {activeQuiz[activeQuestion]?.Statement}
-
-                {/* {console.log(quizState.activeQuiz[0].statement)}  */}
               </div>
 
               <div className="question-options-container margin-top">
                 {optionsArray.map((option, index) => (
-                  <button
-                    onClick={() => setSelectedAnswer(option)}
-                    className="option"
+                  <label
+                    className={
+                      selectedAnswer === option
+                        ? "option-label active-option"
+                        : "option-label"
+                    }
+                    key={index}
                   >
-                    {" "}
-                    {option}{" "}
-                  </button>
+                    <input
+                      onClick={() => setSelectedAnswer(option)}
+                      className="option"
+                      type="radio"
+                      name="option"
+                    />
+
+                    {option}
+                  </label>
                 ))}
-                {/* <button className="option">Option A</button>
-                <button className="option">Option B</button>
-                <button className="option">Option C</button> */}
               </div>
 
               <div className="footer margin-top-xl">
-                <button onClick={onQuitClickHandler} className="quit-btn">
-                  Quit Game
-                </button>
+                <Link to="/">
+                  <button onClick={onQuitClickHandler} className="quit-btn">
+                    Quit Game
+                  </button>
+                </Link>
 
                 <button onClick={onNextClickHandler} className="next-btn">
                   {activeQuestion === 4 ? "Submit" : `Next >>`}
