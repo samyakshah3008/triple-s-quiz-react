@@ -7,7 +7,7 @@ export default function ResultPage() {
   const { quizState, quizDispatch } = useQuiz();
   const [currScore, setCurrScore] = useState(0);
   const { selectedAnswers, activeQuiz, activeQuizAnswers } = quizState;
-  const getclassNameName = (currOption, index) => {
+  const getclassName = (currOption, index) => {
     if (activeQuizAnswers[index] === currOption) return "correct";
     if (selectedAnswers[index] === currOption) return "wrong";
     return "";
@@ -41,7 +41,7 @@ export default function ResultPage() {
                 {quiz.options.map((option) => (
                   <button
                     type="radio"
-                    classNameName={`options ${getclassNameName(option, index)}`}
+                    className={`options ${getclassName(option, index)}`}
                     name="option"
                     key={option}
                   >
