@@ -1,4 +1,3 @@
-import React from "react";
 import Questions from "../../Components/Questions";
 
 export default function QuestionPage() {

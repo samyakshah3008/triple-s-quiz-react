@@ -1,10 +1,11 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { getCategories } from "../services/dataService";
+import { CategoryContextType, CategoryType } from "./categoryContextType";
 
-const CategoryContext = createContext();
+const CategoryContext = createContext<CategoryContextType>( {} as CategoryContextType );
 
-const CategoryProvider = ({ children }) => {
-  const [categories, setCategories] = useState([]);
+const CategoryProvider = ({ children } : {children: React.ReactNode}) => {
+  const [categories, setCategories] = useState<CategoryType[] | []>([]);
 
   useEffect(() => {
     async function getCategoriesFromService() {
