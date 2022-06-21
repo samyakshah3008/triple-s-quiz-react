@@ -35,7 +35,7 @@ export default function ResultPage() {
           {activeQuiz.map((quiz, index) => (
             <>
               <div className="question text-white margin-top">
-                {quiz.statement}
+                {quiz.Statement}
               </div>
               <div className="question-options-container margin-top">
                 {quiz.options.map((option) => (

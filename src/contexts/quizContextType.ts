@@ -1,5 +1,5 @@
 export type QuestionAnswerObj = {
-    statement: string;
+    Statement: string;
     options: Array<string>;
 };
 

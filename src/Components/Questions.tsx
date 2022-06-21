@@ -63,7 +63,7 @@ export default function Questions() {
               </div>
 
               <div className="question text-white  margin-top-xl">
-                {activeQuiz[activeQuestion]?.statement}
+                {activeQuiz[activeQuestion]?.Statement}
               </div>
 
               <div className="question-options-container margin-top">
