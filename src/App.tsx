@@ -6,7 +6,7 @@ import RulePage from "./Pages/rulepage/RulePage";
 
 function App() {
   return (
-    <div classNameName="App">
+    <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/quiz/:quizId" element={<RulePage />} />

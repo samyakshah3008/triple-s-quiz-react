@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuiz } from "../../contexts/quizContext";
 import { getQuiz } from "../../services/dataService";
@@ -26,14 +25,7 @@ export default function RulePage() {
       type: "SET_CATEGORY_NAME",
       payload: response?.categoryName,
     });
-    // console.log(response);
   };
-
-  // console.log(quizState.activeQuestion);
-
-  // onstart function
-  // active quiz object(store it in context)
-  // active question 0
 
   return (
     <div>

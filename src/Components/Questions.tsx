@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuiz } from "../contexts/quizContext";
 import "../Pages/questionpage/questionpage.css";
@@ -10,9 +10,13 @@ export default function Questions() {
   const optionsArray = activeQuiz[activeQuestion]?.options;
   const navigate = useNavigate();
 
-  if (activeQuestion > 4) {
-    navigate("/results");
-  }
+  useEffect(() => {
+    if (activeQuestion > 4) {
+      navigate("/results");
+    }
+  }, [activeQuestion])
+  
+  
 
   const onNextClickHandler = () => {
     quizDispatch({

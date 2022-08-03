@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useCategory } from "../contexts/categoryContext";
 
@@ -7,7 +6,7 @@ export default function Card() {
   return (
     <div>
       <div className="quiz-list-container margin-top-xl">
-        {categories.map((category) => (
+        {categories.map((category: any) => (
           <div className="card">
             <img
               src={category.img.src}

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import  { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { useQuiz } from "../../contexts/quizContext";
 import "./resultpage.css";
 
@@ -7,7 +7,7 @@ export default function ResultPage() {
   const { quizState, quizDispatch } = useQuiz();
   const [currScore, setCurrScore] = useState(0);
   const { selectedAnswers, activeQuiz, activeQuizAnswers } = quizState;
-  const getclassName = (currOption, index) => {
+  const getclassName = (currOption: string, index: number) => {
     if (activeQuizAnswers[index] === currOption) return "correct";
     if (selectedAnswers[index] === currOption) return "wrong";
     return "";
@@ -40,7 +40,6 @@ export default function ResultPage() {
               <div className="question-options-container margin-top">
                 {quiz.options.map((option) => (
                   <button
-                    type="radio"
                     className={`options ${getclassName(option, index)}`}
                     name="option"
                     key={option}
@@ -54,9 +53,9 @@ export default function ResultPage() {
           ))}
 
           <div className="footer margin-top-xl margin-bottom-xl">
-            <Link to="/">
-              <button className="home-btn bold">Play more</button>
-            </Link>
+            <NavLink to="/">
+              <button onClick={() => quizDispatch({type: "RESET_ANSWERS"})} className="home-btn bold">Play more</button>
+            </NavLink>
             <button className="twitter-btn bold">Twitter</button>
             <button className="github-btn bold">Github</button>
             <button className="linkedin-btn bold">Linkedin</button>

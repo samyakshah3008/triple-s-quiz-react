@@ -1,9 +1,10 @@
-import { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer } from "react";
+import { QuizActionType, QuizContextTypes, QuizType } from "./quizContextType";
 
-const QuizContext = createContext({});
+const QuizContext = createContext<QuizContextTypes>({} as QuizContextTypes);
 
-const QuizProvider = ({ children }) => {
-  const initialQuizState = {
+const QuizProvider = ({ children }: {children: React.ReactNode}) => {
+  const initialQuizState: QuizType = {
     category: "",
     categoryName: "",
     activeQuestion: -1,
@@ -13,7 +14,7 @@ const QuizProvider = ({ children }) => {
     activeQuizAnswers: [],
   };
 
-  const quizReducer = (state, action) => {
+  const quizReducer = (state: QuizType, action: QuizActionType) : QuizType => {
     switch (action.type) {
       case "SET_CATEGORY":
         return {
@@ -53,19 +54,27 @@ const QuizProvider = ({ children }) => {
       case "RESET_ANSWERS":
         return {
           ...state,
-          selectedAnswers: [],
+          category: "",
+    categoryName: "",
+    activeQuestion: -1,
+    selectedAnswers: [],
+    score: 0,
+    activeQuiz: [],
+    activeQuizAnswers: [],
         };
       default:
         return { ...state };
     }
-  };
+  }; 
   const [quizState, quizDispatch] = useReducer(quizReducer, initialQuizState);
+  
   return (
-    <QuizContext.Provider value={{ quizState, quizDispatch, initialQuizState }}>
+    <QuizContext.Provider value={{quizState, quizDispatch, initialQuizState}}>
       {children}
     </QuizContext.Provider>
-  );
-};
+  )
+
+  }
 
 const useQuiz = () => useContext(QuizContext);
 
